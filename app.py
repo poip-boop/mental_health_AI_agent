@@ -21,8 +21,6 @@ st.markdown(
 # Initialize Session State 
 if "messages" not in st.session_state:
     st.session_state.messages = []
-if "new_message" not in st.session_state:
-    st.session_state.new_message = None
 
 # Sidebar 
 with st.sidebar:
@@ -30,6 +28,7 @@ with st.sidebar:
     st.markdown("This AI agent uses advanced language models to offer mental health support, conversation, and guidance.")
     st.markdown(SAFETY_MESSAGE)
 
+    # Chat tracker
     user_msgs = sum(1 for m in st.session_state["messages"] if m["role"] == "user")
     ai_msgs = sum(1 for m in st.session_state["messages"] if m["role"] == "ai")
     st.markdown(f"**💬 Messages:** {user_msgs + ai_msgs}")
@@ -49,18 +48,12 @@ with st.form(key="chat_form", clear_on_submit=True):
 
     if submitted and user_input.strip():
         st.session_state.messages.append({"role": "user", "content": user_input})
-        st.session_state.new_message = user_input
-        st.experimental_rerun()
 
-# Respond to new message
-if st.session_state.new_message:
-    with st.spinner("AI is thinking..."):
-        try:
-            ai_response = run_chat(st.session_state.new_message)
-        except Exception as e:
-            ai_response = "⚠️ Sorry, something went wrong. Please try again later."
-            st.error(f"Error: {e}")
+        with st.spinner("AI is thinking..."):
+            try:
+                ai_response = run_chat(user_input)
+            except Exception as e:
+                ai_response = "⚠️ Sorry, something went wrong. Please try again later."
+                st.error(f"Error: {e}")
 
-    st.session_state.messages.append({"role": "ai", "content": ai_response})
-    st.session_state.new_message = None
-    st.experimental_rerun()
+        st.session_state.messages.append({"role": "ai", "content": ai_response})
