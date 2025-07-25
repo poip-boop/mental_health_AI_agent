@@ -2,14 +2,14 @@ import streamlit as st
 from therapist_ai import run_chat
 from crisis import SAFETY_MESSAGE
 
-# Page Configuration 
+# ---------- Page Configuration ----------
 st.set_page_config(
     page_title="Mental Health AI Agent 🧠",
     page_icon="🧠",
     layout="wide",
 )
 
-# Header 
+# ---------- Header ----------
 st.markdown(
     """
     <h1 style='text-align: center; color: #4B8BBE;'>🧠 Mental Health AI Agent</h1>
@@ -18,7 +18,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Initialize Session State 
+# ---------- Initialize Session State 
 if "messages" not in st.session_state:
     st.session_state.messages = []
 

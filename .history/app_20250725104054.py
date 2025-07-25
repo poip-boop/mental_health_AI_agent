@@ -2,7 +2,7 @@ import streamlit as st
 from therapist_ai import run_chat
 from crisis import SAFETY_MESSAGE
 
-# Page Configuration 
+# ---------- Page Configuration 
 st.set_page_config(
     page_title="Mental Health AI Agent 🧠",
     page_icon="🧠",
