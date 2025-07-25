@@ -35,11 +35,8 @@ with st.sidebar:
     st.markdown(f"- You: {user_msgs}")
     st.markdown(f"- AI: {ai_msgs}")
 
-# Main Chat Display 
-st.markdown("### 💬 Chat with the AI Therapist")
-for msg in st.session_state.messages:
-    role = "🧑 You" if msg["role"] == "user" else "🤖 AI"
-    st.markdown(f"**{role}:** {msg['content']}")
+# Create a placeholder for the chat display
+chat_placeholder = st.empty()
 
 # Chat Input 
 with st.form(key="chat_form", clear_on_submit=True):
@@ -57,3 +54,10 @@ with st.form(key="chat_form", clear_on_submit=True):
                 st.error(f"Error: {e}")
 
         st.session_state.messages.append({"role": "ai", "content": ai_response})
+
+# Update the placeholder with the current chat messages
+with chat_placeholder:
+    st.markdown("### 💬 Chat with the AI Therapist")
+    for msg in st.session_state.messages:
+        role = "🧑 You" if msg["role"] == "user" else "🤖 AI"
+        st.markdown(f"**{role}:** {msg['content']}")
