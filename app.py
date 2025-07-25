@@ -22,7 +22,7 @@ st.markdown(
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-#  Sidebar 
+# Sidebar 
 with st.sidebar:
     st.title("ℹ️ About")
     st.markdown("This AI agent uses advanced language models to offer mental health support, conversation, and guidance.")
@@ -35,12 +35,7 @@ with st.sidebar:
     st.markdown(f"- You: {user_msgs}")
     st.markdown(f"- AI: {ai_msgs}")
 
-    # Reset chat
-    if st.button("🔁 Reset Chat"):
-        st.session_state.messages = []
-        st.experimental_rerun()
-
-#  Main Chat Display 
+# Main Chat Display 
 st.markdown("### 💬 Chat with the AI Therapist")
 for msg in st.session_state.messages:
     role = "🧑 You" if msg["role"] == "user" else "🤖 AI"
@@ -62,4 +57,3 @@ with st.form(key="chat_form", clear_on_submit=True):
                 st.error(f"Error: {e}")
 
         st.session_state.messages.append({"role": "ai", "content": ai_response})
-        st.experimental_rerun()
