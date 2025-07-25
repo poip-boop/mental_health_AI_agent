@@ -1,0 +1,11 @@
+streamlit
+mistralai
+sentence-transformers
+faiss-cpu
+python-dotenv
+transformers
+PyMuPDF
+numpy
+requests
+# Optional dependencies for additional functionality
+# Uncomment the following lines if you need these features  
